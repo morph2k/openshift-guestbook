@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: andres-postgres
 spec:
   replicas: 1
   selector:
@@ -13,7 +13,7 @@ spec:
         app: postgres
     spec:
       containers:
-        - name: postgres
+        - name: andres-postgres
           image: {{ .Values.images.postgres }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
@@ -22,12 +22,12 @@ spec:
             - name: POSTGRESQL_USER
               valueFrom:
                 secretKeyRef:
-                  name: backend-secrets
+                  name: andres-backend-secrets
                   key: DB_USER
             - name: POSTGRESQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: backend-secrets
+                  name: andres-backend-secrets
                   key: DB_PASSWORD
             - name: POSTGRESQL_DATABASE
               value: "{{ .Values.db.name }}"
@@ -48,7 +48,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres
+  name: andres-postgres
 spec:
   selector:
     app: postgres

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: andres-backend
 spec:
   replicas: {{ .Values.replicas.backend }}
   selector:
@@ -13,16 +13,16 @@ spec:
         app: backend
     spec:
       containers:
-        - name: backend
+        - name: andres-backend
           image: {{ .Values.images.backend }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
             - containerPort: 8080
           envFrom:
             - configMapRef:
-                name: backend-config
+                name: andres-backend-config
             - secretRef:
-                name: backend-secrets
+                name: andres-backend-secrets
           env:
             - name: PORT
               value: "8080"
@@ -49,7 +49,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend
+  name: andres-backend
 spec:
   selector:
     app: backend
