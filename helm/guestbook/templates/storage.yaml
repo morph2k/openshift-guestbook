@@ -9,3 +9,13 @@ spec:
     requests:
       storage: 10Gi
   storageClassName: lvms-vg1
+---
+metadata:
+  name: redis-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: lvms-vg1
