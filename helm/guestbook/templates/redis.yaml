@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: andres-redis
+  name: redis
 spec:
   replicas: 1
   selector:
@@ -13,7 +13,7 @@ spec:
         app: redis
     spec:
       containers:
-        - name: andres-redis
+        - name: redis
           image: {{ .Values.images.redis }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
@@ -22,7 +22,7 @@ spec:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: andres-backend-secrets
+                  name: backend-secrets
                   key: REDIS_PASSWORD
           volumeMounts:
             - name: data
@@ -41,7 +41,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: andres-redis
+  name: redis
 spec:
   selector:
     app: redis
