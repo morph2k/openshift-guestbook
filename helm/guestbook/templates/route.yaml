@@ -2,11 +2,11 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: andres-guestbook
+  name: guestbook
 spec:
   to:
     kind: Service
-    name: andres-frontend
+    name: frontend
   port:
     targetPort: 8080
   {{- if .Values.route.host }}
