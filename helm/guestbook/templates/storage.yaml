@@ -7,7 +7,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.postgres.storage.size | default "10Gi" }}
-  {{- if .Values.postgres.storage.storageClassName }}
-  storageClassName: {{ .Values.postgres.storage.storageClassName | quote }}
-  {{- end }}
+      storage: 10Gi
+  storageClassName: lvms-vg1
