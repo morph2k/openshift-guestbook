@@ -30,3 +30,8 @@ route:
   tls:
     enabled: true
     termination: edge
+
+postgres:
+  storage:
+    size: 10Gi
+    storageClassName: ""
