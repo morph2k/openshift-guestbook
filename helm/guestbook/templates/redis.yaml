@@ -25,7 +25,7 @@ spec:
                   name: backend-secrets
                   key: REDIS_PASSWORD
           volumeMounts:
-            - name: data
+            - name: redis-data
               mountPath: /var/lib/redis/data
           resources:
             requests:
