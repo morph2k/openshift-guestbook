@@ -34,4 +34,4 @@ route:
 postgres:
   storage:
     size: 10Gi
-    storageClassName: ""
+    storageClassName: "lvms-vg1"
