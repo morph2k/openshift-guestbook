@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis
+  name: andres-redis
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redis
+      app: andres-redis
   template:
     metadata:
       labels:
-        app: redis
+        app: andres-redis
     spec:
       containers:
-        - name: redis
+        - name: andres-redis
           image: {{ .Values.images.redis }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
@@ -22,7 +22,7 @@ spec:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: backend-secrets
+                  name: andres-backend-secrets
                   key: REDIS_PASSWORD
           volumeMounts:
             - name: data
@@ -37,15 +37,15 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: redis-data
+            claimName: andres-redis-data
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis
+  name: andres-redis
 spec:
   selector:
-    app: redis
+    app: andres-redis
   ports:
     - port: 6379
       targetPort: 6379
