@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: andres-frontend
 spec:
   replicas: {{ .Values.replicas.frontend }}
   selector:
     matchLabels:
-      app: frontend
+      app: andres-frontend
   template:
     metadata:
       labels:
-        app: frontend
+        app: andres-frontend
     spec:
       containers:
-        - name: frontend
+        - name: andres-frontend
           image: {{ .Values.images.frontend }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
@@ -29,10 +29,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
+  name: andres-frontend
 spec:
   selector:
-    app: frontend
+    app: andres-frontend
   ports:
     - port: 8080
       targetPort: 8080
