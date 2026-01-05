@@ -1,18 +1,17 @@
-
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  name: andres-guestbook
-  namespace: grupp4
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-spec:
-  host: "old-andres-guestbook-grupp4.apps.devops24.cloud2.se"
-  to:
-    kind: Service
-    name: andres-frontend
-  port:
-    targetPort: 8080
-
-  tls:
-    termination: edge
+#apiVersion: route.openshift.io/v1
+#kind: Route
+#metadata:
+#  name: andres-guestbook
+#  namespace: grupp4
+#  annotations:
+#    cert-manager.io/cluster-issuer: letsencrypt-prod
+#spec:
+#  host: "old-andres-guestbook-grupp4.apps.devops24.cloud2.se"
+#  to:
+#    kind: Service
+#      name: andres-frontend
+#  port:
+#    targetPort: 8080
+#
+#  tls:
+#    termination: edge
