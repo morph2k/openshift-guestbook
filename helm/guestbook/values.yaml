@@ -1,32 +1,33 @@
 namespace: grupp4
+
 images:
   backend: "ghcr.io/morph2k/backend:latest"
   frontend: "ghcr.io/morph2k/frontend:4776c621899e1fd1697f57c7310b8a74b386fcaa"
   postgres: "quay.io/fedora/postgresql-16:latest"
   redis: "quay.io/kurs/redis:latest"
 imagePullPolicy: IfNotPresent
+
 replicas:
   backend: 2
   frontend: 2
+
 storage:
   postgresSize: 1Gi
   redisSize: 1Gi
+
 db:
   name: andres-guestbook
+
 secrets:
   dbUser: andres-guestbook
   dbPassword: superhemligt-losen # ändra sen
   redisPassword: annu-mer-hemligt # ändra sen
-route:
-  enabled: true
-  host: "" # låt OpenShift generera host
-  tls:
-    enabled: true
-    termination: edge
+
 postgres:
   storage:
     size: 10Gi
     storageClassName: "lvms-vg1"
+
 redis:
   storage:
     size: 5Gi
