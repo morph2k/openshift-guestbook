@@ -1,9 +1,13 @@
-name: Build and publish backend and frontend images to GHCR
+name: Build and push backend and frontend images to GHCR
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "frontend/**"
+      - "backend/**"
+      - ".github/workflows/build-images.yaml" # test workflow edits
   workflow_dispatch:
 
 jobs:
@@ -16,6 +20,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      # Detect which parts changed
+      - name: Detect changes
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            backend:
+              - "backend/**"
+            frontend:
+              - "frontend/**"
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
@@ -31,6 +46,7 @@ jobs:
       # Backend
       ##################
       - name: Build & push backend
+        if: steps.changes.outputs.backend == 'true'
         uses: docker/build-push-action@v5
         with:
           context: ./backend
@@ -44,6 +60,7 @@ jobs:
       # Frontend
       ##################
       - name: Build & push frontend
+        if: steps.changes.outputs.frontend == 'true'
         uses: docker/build-push-action@v5
         with:
           context: ./frontend
