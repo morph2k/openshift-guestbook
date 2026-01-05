@@ -5,7 +5,7 @@ metadata:
   name: andres-guestbook
   namespace: grupp4
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: letsencrypt-staging
 spec:
   host: "andres-guestbook-grupp4.apps.devops24.cloud2.se"
   to:
