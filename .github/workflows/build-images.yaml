@@ -55,6 +55,8 @@ jobs:
           tags: |
             ghcr.io/morph2k/backend:latest
             ghcr.io/morph2k/backend:${{ github.sha }}
+          cache-from: type=gha,scope=backend
+          cache-to: type=gha,mode=max,scope=backend
 
       ##################
       # Frontend
@@ -69,3 +71,5 @@ jobs:
           tags: |
             ghcr.io/morph2k/frontend:latest
             ghcr.io/morph2k/frontend:${{ github.sha }}
+          cache-from: type=gha,scope=frontend
+          cache-to: type=gha,mode=max,scope=frontend
