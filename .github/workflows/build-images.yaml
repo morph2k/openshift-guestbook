@@ -74,20 +74,17 @@ jobs:
           cache-from: type=gha,scope=frontend
           cache-to: type=gha,mode=max,scope=frontend
 
-      - name: Update Helm values for image tags
-        if: steps.changes.outputs.backend == 'true' || steps.changes.outputs.frontend == 'true'
-        env:
-          BACKEND_CHANGED: ${{ steps.changes.outputs.backend }}
-          FRONTEND_CHANGED: ${{ steps.changes.outputs.frontend }}
-        run: |
-          set -euo pipefail
-          values_file="helm/guestbook/values.yaml"
-          if [ "${BACKEND_CHANGED}" = "true" ]; then
-            sed -i -e "s|^\([[:space:]]*backend:[[:space:]]*\).*|\\1\"ghcr.io/morph2k/backend:${GITHUB_SHA}\"|" "$values_file"
-          fi
-          if [ "${FRONTEND_CHANGED}" = "true" ]; then
-            sed -i -e "s|^\([[:space:]]*frontend:[[:space:]]*\).*|\\1\"ghcr.io/morph2k/frontend:${GITHUB_SHA}\"|" "$values_file"
-          fi
+      - name: Update backend image tag
+        if: steps.changes.outputs.backend == 'true'
+        uses: mikefarah/yq@v4.44.1
+        with:
+          cmd: yq -i '.images.backend = "ghcr.io/morph2k/backend:${{ github.sha }}"' helm/guestbook/values.yaml
+
+      - name: Update frontend image tag
+        if: steps.changes.outputs.frontend == 'true'
+        uses: mikefarah/yq@v4.44.1
+        with:
+          cmd: yq -i '.images.frontend = "ghcr.io/morph2k/frontend:${{ github.sha }}"' helm/guestbook/values.yaml
 
       - name: Commit and push image tag updates
         if: steps.changes.outputs.backend == 'true' || steps.changes.outputs.frontend == 'true'
