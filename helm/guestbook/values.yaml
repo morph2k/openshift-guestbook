@@ -17,10 +17,10 @@ storage:
   redisSize: 1Gi
 
 db:
-  name: guestbook
+  name: andres-guestbook
 
 secrets:
-  dbUser: guestbook
+  dbUser: andres-guestbook
   dbPassword: superhemligt-losen        # ändra sen
   redisPassword: annu-mer-hemligt       # ändra sen
 
