@@ -4,7 +4,7 @@ metadata:
   name: andres-guestbook
   namespace: grupp4
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-staging
+    cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   ingressClassName: openshift-default
   tls:
