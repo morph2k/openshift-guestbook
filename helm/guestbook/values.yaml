@@ -6,7 +6,7 @@ images:
   postgres: "quay.io/fedora/postgresql-16:latest"
   redis: "quay.io/kurs/redis:latest"
 
-imagePullPolicy: Always
+imagePullPolicy: IfNotPresent
 
 replicas:
   backend: 2
