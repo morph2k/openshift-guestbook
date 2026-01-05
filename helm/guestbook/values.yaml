@@ -10,7 +10,7 @@ imagePullPolicy: IfNotPresent
 
 replicas:
   backend: 2
-  frontend: "ghcr.io/morph2k/frontend:e6e460511dcbe91928b9e077187594042b2502d1"
+  frontend: 2
 
 storage:
   postgresSize: 1Gi
