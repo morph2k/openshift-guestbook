@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts:
         - andres-guestbook-grupp4.apps.devops24.cloud2.se
-      secretName: andres-guestbook-tls
+      secretName: andres-guestbook-cert
   rules:
     - host: andres-guestbook-grupp4.apps.devops24.cloud2.se
       http:
