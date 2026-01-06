@@ -1,4 +1,4 @@
-# --- Build stage ---
+# --- Build stage --- 
 FROM registry.access.redhat.com/ubi10/go-toolset:10.0 AS builder
 
 # Kör som root i build-staget så vi kan skriva till go.mod/go.sum
