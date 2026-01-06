@@ -8,8 +8,8 @@ images:
 imagePullPolicy: IfNotPresent
 
 replicas:
-  backend: 2
-  frontend: 2
+  backend: 4
+  frontend: 4
 
 storage:
   postgresSize: 1Gi
