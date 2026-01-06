@@ -6,8 +6,8 @@ images:
   redis: "quay.io/kurs/redis:latest"
 imagePullPolicy: IfNotPresent
 replicas:
-  backend: 4
-  frontend: 4
+  backend: 2
+  frontend: 2
 
 storage:
   postgresSize: 1Gi
