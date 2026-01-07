@@ -22,7 +22,3 @@ postgres:
   storage:
     size: 10Gi
     storageClassName: "lvms-vg1"
-redis:
-  storage:
-    size: 5Gi
-    storageClassName: "lvms-vg1"
