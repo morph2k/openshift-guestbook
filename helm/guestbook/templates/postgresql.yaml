@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: andres-postgres
 spec:
-  serviceName: andres-postgres
+  serviceName: andres-postgres-headless
   replicas: 1
   selector:
     matchLabels:
@@ -100,10 +100,23 @@ kind: Service
 metadata:
   name: andres-postgres
 spec:
+  selector:
+    app: andres-postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: andres-postgres-headless
+spec:
   clusterIP: None
   selector:
     app: andres-postgres
   ports:
-    - name: andres-postgres
+    - name: postgres
       port: 5432
       targetPort: 5432
