@@ -5,19 +5,23 @@ images:
   postgres: "quay.io/fedora/postgresql-16:latest"
   redis: "quay.io/kurs/redis:latest"
 imagePullPolicy: IfNotPresent
+
 replicas:
-  backend: 2
-  frontend: 2
+  backend: 1
+  frontend: 1
 
 storage:
   postgresSize: 1Gi
   redisSize: 1Gi
+
 db:
   name: andres-guestbook
+
 secrets:
   dbUser: andres-guestbook
   dbPassword: superhemligt-losen # ändra sen
   redisPassword: annu-mer-hemligt # ändra sen
+
 postgres:
   storage:
     size: 10Gi
