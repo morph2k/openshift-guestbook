@@ -34,10 +34,27 @@ spec:
             limits:
               cpu: "250m"
               memory: "256Mi"
+
+          readinessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          
+          livenessProbe:
+            tcpSocket:
+              port: 6379
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+
       volumes:
         - name: data
-          persistentVolumeClaim:
-            claimName: andres-redis-data
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
