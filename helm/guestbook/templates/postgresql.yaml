@@ -100,7 +100,6 @@ kind: Service
 metadata:
   name: andres-postgres
 spec:
-  clusterIP: None
   selector:
     app: andres-postgres
   ports:
