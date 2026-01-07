@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: andres-postgres
+spec:
+  serviceName: andres-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: andres-postgres
+  template:
+    metadata:
+      labels:
+        app: andres-postgres
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: andres-postgres
+          image: {{ .Values.images.postgres }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          ports:
+            - containerPort: 5432
+          
+          env:
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: andres-backend-secrets
+                  key: DB_USER
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: andres-backend-secrets
+                  key: DB_PASSWORD
+            - name: POSTGRESQL_DATABASE
+              value: "{{ .Values.db.name }}"
+
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/pgsql/data
+
+
+          startupProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -h 127.0.0.1 -p 5432
+            failureThreshold: 30
+            periodSeconds: 5
+
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -h 127.0.0.1 -p 5432
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - pg_isready -h 127.0.0.1 -p 5432
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 6
+          
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: ["ALL"]
+
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: {{ .Values.postgres.storage.storageClassName | quote }}
+        resources:
+          requests:
+            storage: {{ .Values.postgres.storage.size | quote }}
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: andres-postgres
+spec:
+  clusterIP: None
+  selector:
+    app: andres-postgres
+  ports:
+    - name: andres-postgres
+      port: 5432
+      targetPort: 5432
