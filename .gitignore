@@ -16,6 +16,3 @@ helm/guestbook/charts/
 helm/guestbook/tmp/
 helm/guestbook/*.tgz
 "@ | Out-File -Encoding UTF8 .gitignore
-
-# Secrets
-secret.yaml
