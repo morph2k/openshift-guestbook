@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: andres-guestbook
-  namespace: openshift-gitops
+  namespace: grupp4
 spec:
   project: default
 
