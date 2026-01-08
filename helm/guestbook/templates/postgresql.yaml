@@ -94,7 +94,7 @@ spec:
   selector:
     app: andres-postgres
   ports:
-    - name: postgres
+    - name: andres-postgres
       port: 5432
       targetPort: 5432
 
@@ -108,6 +108,6 @@ spec:
   selector:
     app: andres-postgres
   ports:
-    - name: postgres
+    - name: andres-postgres
       port: 5432
       targetPort: 5432
