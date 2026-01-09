@@ -2,7 +2,7 @@ namespace: grupp4
 
 images:
   backend: "ghcr.io/morph2k/backend:133a490a8445d42427946343363ca9dbd842acd2"
-  frontend: "ghcr.io/morph2k/frontend:4d0aa23be763a4c97b02996b69d4c059d6e709e7"
+  frontend: "ghcr.io/morph2k/frontend:04f664ca4aa95f5eae9233c898a352cdcb2ad280"
   postgres: "quay.io/fedora/postgresql-16:latest"
   redis: "quay.io/kurs/redis:latest"
 
@@ -17,7 +17,6 @@ storage:
   redisSize: 1Gi
 
 secrets:
-  dbName: andres-guestbook
   dbUser: andres-guestbook
   dbPassword: superhemligt-losen # ändra sen
   redisPassword: annu-mer-hemligt # ändra sen
